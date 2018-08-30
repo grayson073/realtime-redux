@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import logo from './logo.png';
+import styles from './Header.css';
 
 export default class componentName extends Component {
 
   render() {
     return (
-      <section>
+      <div className={styles.header}>
         <div className="logo">
           <img src={logo}/>
-          <h1>Rock Paper Scissors</h1>
         </div>
+        <h1>Rock Paper Scissors</h1>
         <nav>
           <ul>
             <li>
@@ -18,7 +19,7 @@ export default class componentName extends Component {
             </li>
           </ul>
         </nav>
-      </section>
+      </div>
     );
   }
 }
