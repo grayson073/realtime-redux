@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Header from './Header';
 import Home from './Home'; 
-import Game from '../game/Game'; 
+import Game from '../game/Game';
+import { login } from './actions'; 
 import styles from './App.css';
 
-export default class componentName extends Component {
+class App extends Component {
+  
+  static propTypes = {
+    login: PropTypes.func.isRequired
+  };
+
+  componentDidMount() {
+    this.props.login();
+  }
 
   render() {
     return (
@@ -27,3 +38,8 @@ export default class componentName extends Component {
     );
   }
 }
+
+export default connect(
+  null,
+  { login }
+)(App);
