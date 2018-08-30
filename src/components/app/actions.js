@@ -1,6 +1,6 @@
-import { ERROR, ERROR_CLEAR, USER_LOAD } from './reducers';
+import { ERROR, ERROR_CLEAR, USER_LOAD, getUser } from './reducers';
 import { auth } from '../../services/firebase';
-// import { userGamesRef, playersRef } from '../../services/firebaseRef';
+import { userGamesRef, playersRef } from '../../services/firebaseRef';
 
 export const clearError = () => ({ type: ERROR_CLEAR });
 
@@ -28,6 +28,16 @@ export const login = () => {
   };
 };
 
-export const updateUserName = (name) => {
-  
+export const requestGame = () => {
+  return (dispatch, getState) => {
+    const user = getUser(getState());
+    playersRef.child(user.uid)
+      .set(true)
+      .catch(err => {
+        dispatch({
+          type: ERROR,
+          payload: err.message
+        });
+      });
+  };
 };
