@@ -27,3 +27,7 @@ export const login = () => {
     });
   };
 };
+
+export const updateUserName = (name) => {
+  
+};
