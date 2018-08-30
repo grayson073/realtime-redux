@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import logo from './logo.png';
 import styles from './Header.css';
 
-export default class componentName extends Component {
+export default class Header extends Component {
 
   render() {
     return (
