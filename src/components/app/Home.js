@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styles from './Home.css';
 import { getUser, getGames } from './reducers';
-import { login } from './actions';
+import { login, requestGame } from './actions';
 import { Link } from 'react-router-dom';
 
 class Home extends Component {
@@ -64,6 +64,11 @@ export const UserGames = ({ onRequest, games }) => {
       </ul>
     </section>
   );
+};
+
+UserGames.propTypes = {
+  games: PropTypes.array.isRequired,
+  onRequest: PropTypes.func.isRequired
 };
 
 export default connect(
