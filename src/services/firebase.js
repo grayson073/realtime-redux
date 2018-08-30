@@ -9,7 +9,8 @@ const config = {
   messagingSenderId: '600524956797'
 };
 
+//the root app just in case we need it
 export const firebaseApp = firebase.initializeApp(config);
 
-export const db = firebaseApp.database();
-export const auth = firebaseApp.auth();
+export const db = firebaseApp.database(); //the real-time database
+export const auth = firebaseApp.auth(); //the firebase auth namespace
