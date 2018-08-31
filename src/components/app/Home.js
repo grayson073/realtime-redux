@@ -48,11 +48,16 @@ class Home extends Component {
       </div>
     );
   }
-
-
 }
 
-export const UserGames = ({ onRequest, games }) => {
+export default connect(
+  state => ({
+    user: getUser(state),
+    games: getGames(state)
+  }), { login, requestGame }
+)(Home);
+
+const UserGames = ({ onRequest, games }) => {
   return (
     <section>
       <button onClick={onRequest}>Play Game</button>
@@ -72,9 +77,3 @@ UserGames.propTypes = {
   onRequest: PropTypes.func.isRequired
 };
 
-export default connect(
-  state => ({
-    user: getUser(state),
-    games: getGames(state)
-  }), { login, requestGame }
-)(Home);
