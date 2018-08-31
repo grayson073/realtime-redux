@@ -1,4 +1,4 @@
-import { ERROR, ERROR_CLEAR, USER_LOAD, getUser } from './reducers';
+import { ERROR, ERROR_CLEAR, USER_LOAD, GAMES_LOAD, getUser } from './reducers';
 import { auth } from '../../services/firebase';
 import { userGamesRef, playersRef } from '../../services/firebaseRef';
 
@@ -14,7 +14,13 @@ export const login = () => {
           payload: user
         });
 
-        console.log('Load some games here');
+        userGamesRef.child(user.uid).on('value', snapshot => {
+          dispatch({
+            type: GAMES_LOAD,
+            payload: Object.keys(snapshot.val())
+          });
+        });
+
       } else {
         auth.signInAnonymously()
           .catch(err => {
