@@ -13,8 +13,9 @@ class Game extends Component {
     game: PropTypes.object,
     user: PropTypes.object,
     loadGame: PropTypes.func.isRequired,
-    unloadGame: PropTypes.func.isRequired
-  }
+    unloadGame: PropTypes.func.isRequired,
+    move: PropTypes.func.isRequired
+  };
 
   componentDidMount() {
     const { match, loadGame } = this.props;
@@ -51,7 +52,7 @@ class Game extends Component {
                   })}
                 </ul>
               </li>
-            )
+            );
           })}
         </ul>
 
