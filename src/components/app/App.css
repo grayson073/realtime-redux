@@ -1,0 +1,12 @@
+:local(.app) {
+  margin: 10px;
+  background-color: black;
+  color: white;
+
+  a, a:visited {
+    color: white;
+  }
+  a:hover {
+    color: red;
+  }
+}

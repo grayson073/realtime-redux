@@ -1,0 +1,24 @@
+:local(.header) {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  padding: 10px;
+  padding-top: 20px;
+
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: rgb(255, 234, 0);
+
+  h1 {
+    position: relative;
+    top: 10px;
+  }
+
+  li {
+    list-style: none;
+    margin-right: 15px;
+  }
+  
+  img {
+    width: 300px;
+  }
+}

@@ -1,10 +1,45 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import Header from './Header';
+import Home from './Home'; 
+import Game from '../game/Game';
+import { login } from './actions'; 
+import styles from './App.css';
 
-export default class componentName extends Component {
+class App extends Component {
+  
+  static propTypes = {
+    login: PropTypes.func.isRequired
+  };
+
+  componentDidMount() {
+    this.props.login();
+  }
 
   render() {
     return (
-      <h1>Hello React!</h1>
+      <Router>
+        <div className={styles.app}>
+          <header>
+            <Header/>
+          </header>
+
+          <main>
+            <Switch>
+              <Route exact path="/" component={Home}/>
+              <Route exact path="/games/:gameKey" component={Game}/>
+              <Redirect to="/"/>
+            </Switch>
+          </main>
+        </div>
+      </Router>
     );
   }
 }
+
+export default connect(
+  null,
+  { login }
+)(App);
