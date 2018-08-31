@@ -47,9 +47,10 @@ class Game extends Component {
             return (
               <li key={i}>
                 <ul>
-                  {round.moves.map(move => {
+                  {round.moves.map(move => (
                     <li key={move.uid}>{who(move.uid)}: {move.play}</li>
-                  })}
+                  ))}
+                  <li>WINNER: {who(round.winner)}</li>
                 </ul>
               </li>
             );

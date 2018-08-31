@@ -31,3 +31,44 @@ exports.playerQueue = functions.database.ref('/players/{uid}').onCreate((snapsho
 
     });
 });
+
+exports.moveQueue = functions.database.ref('/moves/{gameKey}/{uid}').onCreate((snapshot, context) => {
+   // Grab the current value of what was written to the Realtime Database.
+  const { gameKey } = context.params;
+
+  const gamesMovesRef = movesRef.child(gameKey);
+
+  return gamesMovesRef.once('value')
+    .then(snapshot => {
+      const game = snapshot.val();
+      const moves= Object.keys(game)
+        .map(key => ({
+          uid: key,
+          play: game[key]
+        }));
+      if(moves.length < 2) return null;
+
+      const roundRef = gamesRef.child(gameKey).child('rounds').push();
+
+      return Promise.all([
+        gameMovesRef.remove(),
+        roundRef.set({
+          moves,
+          winner: calculateWinner(moves)
+        })
+      ]);
+    });
+});
+
+const calculateWinner = ([move1, move2]) => {
+  if(isWinner(move1.play, move2.play)) return move1.uid;
+  if(isWinner(move2.play, move1.play)) return move2.uid;
+  return null;
+};
+
+const isWinner = (play1, play2) => {
+  if(play1 === 'SCISSORS' && play2 === 'PAPER') return true;
+  if(play1 === 'PAPER' && play2 === 'ROCK') return true;
+  if(play1 === 'ROCK' && play2 === 'SCISSORS') return true;
+  return false;
+};
