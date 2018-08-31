@@ -33,15 +33,15 @@ exports.playerQueue = functions.database.ref('/players/{uid}').onCreate((snapsho
 });
 
 exports.moveQueue = functions.database.ref('/moves/{gameKey}/{uid}').onCreate((snapshot, context) => {
-   // Grab the current value of what was written to the Realtime Database.
+  // Grab the current value of what was written to the Realtime Database.
   const { gameKey } = context.params;
+  
+  const gameMovesRef = movesRef.child(gameKey);
 
-  const gamesMovesRef = movesRef.child(gameKey);
-
-  return gamesMovesRef.once('value')
+  return gameMovesRef.once('value')
     .then(snapshot => {
       const game = snapshot.val();
-      const moves= Object.keys(game)
+      const moves = Object.keys(game)
         .map(key => ({
           uid: key,
           play: game[key]
@@ -49,12 +49,12 @@ exports.moveQueue = functions.database.ref('/moves/{gameKey}/{uid}').onCreate((s
       if(moves.length < 2) return null;
 
       const roundRef = gamesRef.child(gameKey).child('rounds').push();
-
+      
       return Promise.all([
         gameMovesRef.remove(),
         roundRef.set({
           moves,
-          winner: calculateWinner(moves)
+          winner: calculateWinner(moves) 
         })
       ]);
     });
