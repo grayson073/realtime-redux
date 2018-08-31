@@ -32,8 +32,8 @@ exports.playerQueue = functions.database.ref('/plays/{uid}').onCreate((snapshot,
           newGameRef.set({ player1: uid, player2: player }),
           playersRef.child(uid).remove(),
           playersRef.child(player).remove(),
-          userGamesref.child(uid).child(newGameRef.key).set(true),
-          userGameRef.child(player).child(newGameRef.key).set(true)
+          userGamesRef.child(uid).child(newGameRef.key).set(true),
+          userGamesRef.child(player).child(newGameRef.key).set(true)
         ]);
     });
 });

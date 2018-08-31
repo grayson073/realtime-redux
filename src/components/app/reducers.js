@@ -9,6 +9,7 @@ export const GAMES_LOAD = 'GAMES_LOAD';
 export const getError = state => state.error;
 export const getLoading = state => state.loading;
 export const getUser = state => state.user;
+export const getGames = state => state.games;
 
 export function error(state = null, { type, payload }) {
   switch(type) {

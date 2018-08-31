@@ -11,7 +11,8 @@ class Home extends Component {
   static propTypes = {
     user: PropTypes.object,
     login: PropTypes.func,
-    requestGame: PropTypes.func.isRequired
+    requestGame: PropTypes.func.isRequired,
+    games: PropTypes.array
   };
 
   handleNameChange = () => {
@@ -38,10 +39,10 @@ class Home extends Component {
             <span> {user.displayName === null ? 'stranger' : user.displayName}!</span>
           }
         </h2>
+        <button onClick={this.handleNameChange}>Change name</button>
         {user &&
-        <UserGames games={games} onRequest={requestGame}/>
+          <UserGames games={games} onRequest={requestGame}/>
         }
-        <button onClick={this.handleNameChange}>(Change your name)</button>
 
         <p>Play a game in real time!</p>
       </div>
@@ -60,7 +61,7 @@ export const UserGames = ({ onRequest, games }) => {
           <li key={gameKey}>
             <Link to={`/games/${gameKey}`}>Game {i + 1}</Link>
           </li>
-        ))};
+        ))}
       </ul>
     </section>
   );
