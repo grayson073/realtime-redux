@@ -63,7 +63,7 @@ exports.moveQueue = functions.database.ref('/moves/{gameKey}/{uid}').onCreate((s
 const calculateWinner = ([move1, move2]) => {
   if(isWinner(move1.play, move2.play)) return move1.uid;
   if(isWinner(move2.play, move1.play)) return move2.uid;
-  return null;
+  return 'TIE';
 };
 
 const isWinner = (play1, play2) => {
