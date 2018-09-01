@@ -4,7 +4,7 @@ const CleanPlugin = require('clean-webpack-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
 // const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const buildDir = 'docs';
+const buildDir = 'build';
 const path = resolve(__dirname, buildDir);
 
 module.exports = {
